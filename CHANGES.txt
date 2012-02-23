@@ -1,0 +1,91 @@
+/**
+ * Change Log
+ */
+
+/**
+ * @version 1.8.3-12.02.22b
+ */
+- now based on new phloor system
+- requires PHP version >= 5.3.0
+- added 'owner_block' and 'user_hover'
+
+/**
+ * @version 1.8-12.01.28
+ */
+- menuitems for guests only
+- set different contexts for menuitems
+
+/**
+ * @version 1.8-12.01.19
+ */
+- better overall user experience
+- fixed icon issues
+
+/**
+ * @version 1.8-12.01.10
+ */
+- ajax sortable items - finally...
+- removed "all" tab (as it is confusing)
+- tiny icons
+
+/**
+ * @version 1.8-11.12.31
+ */
+- applied class "elgg-state-selected" to selected menu items
+- applied 'limit' parameter to entity fetch functions
+- serious pagehandler problem fix [workaround; temporary]
+
+/**
+ * @version 1.8-11.12.16
+ */
+- added dependency 'phloorFramework' as requirement
+   
+/**
+ * @version 1.8-11.12.12
+ */
+- added french language file (thanks to Jean-Baptiste Duclos)
+
+ /**
+ * @version  1.8-11.12.01
+ */
+- enable/disable addition default theme css rules
+  via plugin settings
+
+ /**
+ * @version 1.8-11.11.29
+ */
+- files access now via ElggFile
+- changed icon to famfamfam silk set
+
+/**
+ * @version 1.8-11.11.28
+ */
+- added button 'view parent item' for subitems
+- some basic ui stuff
+   
+/**
+ * @version 1.8-11.11.22
+ */
+- null variable registered in menuitems entity menu [fixed]
+- add german language support
+ 
+/**
+ * @version 1.8-11.11.21
+ */
+- security and code clean up
+- added gpl header 
+- image was not removed when entity was deleted [fixed]
+
+ 
+/**
+ * @version 1.8-11.11.20
+ */
+- Initial release
+
+
+
+
+
+
+
+

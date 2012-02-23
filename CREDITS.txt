@@ -1,0 +1,11 @@
+/**
+ * Translations
+ */
+Many thanks to Jean-Baptiste Duclos (French translation)!
+
+/**
+ * Icons
+ */
+This plugin uses icons from the amazing famfamfam silk icon set:
+Please visit: http://www.famfamfam.com/lab/icons/silk/
+Thank you Mr Mark James for this great work.
