@@ -1,24 +1,24 @@
 <?php
 /*****************************************************************************
  * Phloor Menuitem                                                           *
- *                                                                           *
- * Copyright (C) 2011 Alois Leitner                                          *
- *                                                                           *
- * This program is free software: you can redistribute it and/or modify      *
- * it under the terms of the GNU General Public License as published by      *
- * the Free Software Foundation, either version 2 of the License, or         *
- * (at your option) any later version.                                       *
- *                                                                           *
- * This program is distributed in the hope that it will be useful,           *
- * but WITHOUT ANY WARRANTY; without even the implied warranty of            *
- * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the             *
- * GNU General Public License for more details.                              *
- *                                                                           *
- * You should have received a copy of the GNU General Public License         *
- * along with this program.  If not, see <http://www.gnu.org/licenses/>.     *
- *                                                                           *
- * "When code and comments disagree both are probably wrong." (Norm Schryer) *
- *****************************************************************************/
+*                                                                           *
+* Copyright (C) 2011 Alois Leitner                                          *
+*                                                                           *
+* This program is free software: you can redistribute it and/or modify      *
+* it under the terms of the GNU General Public License as published by      *
+* the Free Software Foundation, either version 2 of the License, or         *
+* (at your option) any later version.                                       *
+*                                                                           *
+* This program is distributed in the hope that it will be useful,           *
+* but WITHOUT ANY WARRANTY; without even the implied warranty of            *
+* MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the             *
+* GNU General Public License for more details.                              *
+*                                                                           *
+* You should have received a copy of the GNU General Public License         *
+* along with this program.  If not, see <http://www.gnu.org/licenses/>.     *
+*                                                                           *
+* "When code and comments disagree both are probably wrong." (Norm Schryer) *
+*****************************************************************************/
 ?>
 <?php
 
@@ -48,18 +48,18 @@ class PhloorMenuitemAdapter extends ElggMenuItem {
         }
 
         $children = \phloor_menuitem\get_children($entity);
-        
+
         $pl = new ElggPriorityList();
         if (is_array($children) && !empty($children)) {
             // insert unique priority -> menuitem array
             foreach ($children as $child) {
                 $item = new PhloorMenuitemAdapter($child);
-        
+
                 // dont add the menu item if it is for guests only!
                 if (phloor_str_is_true($item->isGuestsOnly()) && elgg_is_logged_in()) {
                     continue;
                 }
-                
+
                 // if not in context => contine
                 if(!$item->inContext(elgg_get_context())) {
                     continue;
@@ -72,19 +72,19 @@ class PhloorMenuitemAdapter extends ElggMenuItem {
 
                 $item->setParentName($this->getName());
                 $item->setParent($this);
-        
+
                 $priority = (int) $item->getPriority();
-        
+
                 if (!is_numeric($priority)) {
                     $priority = 500;
                 }
-        
+
                 $pl->add($item, $priority);
             }
         }
-        
+
         $this->setChildren($pl->getElements());
-        
+
     }
 
     public function getEntity() {
@@ -120,42 +120,42 @@ class PhloorMenuitemAdapter extends ElggMenuItem {
     public function setPriority($priority) {
         $this->entity->setPriority($priority);
     }
-    
+
     public function isGuestsOnly() {
         return $this->entity->guests_only;
     }
     public function setGuestsOnly($guests_only) {
         $this->entity->guests_only = $guests_only;
     }
-    
 
-	/**
-	 * Should this menu item be used given the current context
-	 *
-	 * @param string $context A context string (default is empty string for
-	 *                        current context stack).
-	 * @return bool
-	 */
-	public function inContext($context = '') {
-	    $valid_contexts = $this->entity->getContext();
-		if (count($valid_contexts) <= 0) {
-			return true;
-		}
 
-		if (in_array('all', $valid_contexts)) {
-			return true;
-		}
+    /**
+     * Should this menu item be used given the current context
+     *
+     * @param string $context A context string (default is empty string for
+     *                        current context stack).
+     * @return bool
+     */
+    public function inContext($context = '') {
+        $valid_contexts = $this->entity->getContext();
+        if (count($valid_contexts) <= 0) {
+            return true;
+        }
 
-		if ($context) {
-			return in_array($context, $valid_contexts);
-		}
+        if (in_array('all', $valid_contexts)) {
+            return true;
+        }
 
-		foreach ($valid_contexts as $context) {
-			if (elgg_in_context($context)) {
-				return true;
-			}
-		}
-		return false;
-	}
+        if ($context) {
+            return in_array($context, $valid_contexts);
+        }
+
+        foreach ($valid_contexts as $context) {
+            if (elgg_in_context($context)) {
+                return true;
+            }
+        }
+        return false;
+    }
 
 }

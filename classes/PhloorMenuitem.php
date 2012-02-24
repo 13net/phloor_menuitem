@@ -1,24 +1,24 @@
 <?php
 /*****************************************************************************
  * Phloor Menuitem                                                           *
- *                                                                           *
- * Copyright (C) 2011 Alois Leitner                                          *
- *                                                                           *
- * This program is free software: you can redistribute it and/or modify      *
- * it under the terms of the GNU General Public License as published by      *
- * the Free Software Foundation, either version 2 of the License, or         *
- * (at your option) any later version.                                       *
- *                                                                           *
- * This program is distributed in the hope that it will be useful,           *
- * but WITHOUT ANY WARRANTY; without even the implied warranty of            *
- * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the             *
- * GNU General Public License for more details.                              *
- *                                                                           *
- * You should have received a copy of the GNU General Public License         *
- * along with this program.  If not, see <http://www.gnu.org/licenses/>.     *
- *                                                                           *
- * "When code and comments disagree both are probably wrong." (Norm Schryer) *
- *****************************************************************************/
+*                                                                           *
+* Copyright (C) 2011 Alois Leitner                                          *
+*                                                                           *
+* This program is free software: you can redistribute it and/or modify      *
+* it under the terms of the GNU General Public License as published by      *
+* the Free Software Foundation, either version 2 of the License, or         *
+* (at your option) any later version.                                       *
+*                                                                           *
+* This program is distributed in the hope that it will be useful,           *
+* but WITHOUT ANY WARRANTY; without even the implied warranty of            *
+* MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the             *
+* GNU General Public License for more details.                              *
+*                                                                           *
+* You should have received a copy of the GNU General Public License         *
+* along with this program.  If not, see <http://www.gnu.org/licenses/>.     *
+*                                                                           *
+* "When code and comments disagree both are probably wrong." (Norm Schryer) *
+*****************************************************************************/
 ?>
 <?php
 
@@ -40,13 +40,13 @@ class PhloorMenuitem extends AbstractPhloorElggThumbnails {
         $this->attributes['subtype'] = "phloor_menuitem";
         $this->attributes['comments_on'] = 'Off';
     }
-    
+
     public function save() {
         $return = parent::save();
-    
+
         return $return;
     }
-    
+
     public function delete() {
         $message = '';
 
@@ -58,15 +58,15 @@ class PhloorMenuitem extends AbstractPhloorElggThumbnails {
         foreach($children as $child) {
             $child->parent_guid = $this->parent_guid;
             $child->menu_name   = $this->menu_name;
-            
+
             if($child->save()) {
                 $message .= "{$child->getTitle(true)};";
             }
         }
-        
+
         if(!empty($message)) {
             system_message(elgg_echo('phloor_menuitem:moveditemsonlevelup', array($message)));
-        }    
+        }
 
         return parent::delete();
     }
@@ -76,12 +76,12 @@ class PhloorMenuitem extends AbstractPhloorElggThumbnails {
         if(!in_array($size, $sizes)) {
             $size = 'topbar';
         }
-    
+
         $image_url = "mod/phloor_menuitem/graphics/icons/default/$size.png";
-    
+
         return elgg_normalize_url($image_url);
     }
-    
+
 
     public function hasParent() {
         return $this->parent_guid != 0;
@@ -223,13 +223,13 @@ class PhloorMenuitem extends AbstractPhloorElggThumbnails {
 
     public function getContext() {
         $tag_string = $this->contexts;
-		$tag_array = string_to_tag_array($tag_string);
+        $tag_array = string_to_tag_array($tag_string);
 
-		if($tag_array === false || empty($tag_array)) {
-		    $tag_array = array('all');
-		}
+        if($tag_array === false || empty($tag_array)) {
+            $tag_array = array('all');
+        }
 
-	    return $tag_array;
+        return $tag_array;
     }
 }
 

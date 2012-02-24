@@ -69,7 +69,7 @@ $english = array(
 	'phloor/object/phloor_menuitem:form:access_id:description' => 'Who is allowed to see this menu item? ',
 	'phloor/object/phloor_menuitem:form:target:description'    => '(This is currently not supported) ',
 	'phloor/object/phloor_menuitem:form:delete_image:description' => 'Checking this box will result in the current icon being deleted. ',
-	'phloor/object/phloor_menuitem:form:guests_only:description' => 'If this option is activated the menuitem will not be shown to logged in users and will therefore be visible to logged out/not registered users only! ',
+	'phloor/object/phloor_menuitem:form:guests_only:description' => 'If this option is activated the menuitem will be visible to logged out/not registered users only! ',
     'phloor/object/phloor_menuitem:form:contexts:description' => 'A comma-seperated list of contexts this menuitem should be displayed. Default is "all" (always visible).',
 
 	'phloor/object/phloor_menuitem:menu_name' => 'Menu',

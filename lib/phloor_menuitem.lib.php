@@ -1,24 +1,24 @@
 <?php
 /*****************************************************************************
  * Phloor Menuitem                                                           *
- *                                                                           *
- * Copyright (C) 2011, 2012 Alois Leitner                                    *
- *                                                                           *
- * This program is free software: you can redistribute it and/or modify      *
- * it under the terms of the GNU General Public License as published by      *
- * the Free Software Foundation, either version 2 of the License, or         *
- * (at your option) any later version.                                       *
- *                                                                           *
- * This program is distributed in the hope that it will be useful,           *
- * but WITHOUT ANY WARRANTY; without even the implied warranty of            *
- * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the             *
- * GNU General Public License for more details.                              *
- *                                                                           *
- * You should have received a copy of the GNU General Public License         *
- * along with this program.  If not, see <http://www.gnu.org/licenses/>.     *
- *                                                                           *
- * "When code and comments disagree both are probably wrong." (Norm Schryer) *
- *****************************************************************************/
+*                                                                           *
+* Copyright (C) 2011, 2012 Alois Leitner                                    *
+*                                                                           *
+* This program is free software: you can redistribute it and/or modify      *
+* it under the terms of the GNU General Public License as published by      *
+* the Free Software Foundation, either version 2 of the License, or         *
+* (at your option) any later version.                                       *
+*                                                                           *
+* This program is distributed in the hope that it will be useful,           *
+* but WITHOUT ANY WARRANTY; without even the implied warranty of            *
+* MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the             *
+* GNU General Public License for more details.                              *
+*                                                                           *
+* You should have received a copy of the GNU General Public License         *
+* along with this program.  If not, see <http://www.gnu.org/licenses/>.     *
+*                                                                           *
+* "When code and comments disagree both are probably wrong." (Norm Schryer) *
+*****************************************************************************/
 
 namespace phloor_menuitem;
 
@@ -56,7 +56,7 @@ function form_vars($hook, $type, $return, $params) {
 	    'contexts'     => 'input/tags',
 		'access_id'    => 'input/access',
 		'guests_only'  => 'phloor/input/enable',
-        // hidden
+    // hidden
 		'parent_guid'  => 'input/hidden',
 		'context'      => 'input/hidden', // will not be safed! (no attribute of menuitem)
     );
@@ -82,11 +82,11 @@ function prepare_form_vars($hook, $type, $return, $params) {
 		'parent_guid'  => array(
 			'view'  => 'input/hidden',
 			'value' => $parent_guid,
-        ),
+    ),
 		'context'      => array(
 			'view' => 'input/hidden', // will not be safed! (no attribute of menuitem)
 			'value' => elgg_get_context(),
-        ),
+    ),
     );
 
     // merge with given $return array
@@ -185,21 +185,21 @@ function page_handler_view($hook, $type, $return, $params) {
     // register title button to go to parent
     if ($menuitem->parent_guid != 0) {
         elgg_register_menu_item('title', array(
-    			'name' => "phloor-menuitem-{$menuitem->guid}-back-to-parent",
-    			'href' => "phloor/object/phloor_menuitem/view/{$menuitem->parent_guid}",
-    			'text' => elgg_echo('phloor_menuitem:backtoparent'),
-    			'link_class' => 'elgg-button elgg-button-action',
-    		    'priority' => 100,
+			'name' => "phloor-menuitem-back-to-parent",
+			'href' => "phloor/object/phloor_menuitem/view/{$menuitem->parent_guid}",
+			'text' => elgg_echo('phloor_menuitem:backtoparent'),
+			'link_class' => 'elgg-button elgg-button-action',
+		    'priority' => 100,
         ));
     }
     else {
         // register title button to view the menu
         elgg_register_menu_item('title', array(
-        		'name' => "phloor-menuitem-{$menuitem->guid}-view-menu",
-        		'href' => "phloor/object/phloor_menuitem/menu/{$menuitem->menu_name}",
-        		'text' => elgg_echo('phloor_menuitem:view_menu'),
-        		'link_class' => 'elgg-button elgg-button-action',
-        	    'priority' => 100,
+    		'name' => "phloor-menuitem-view-menu",
+    		'href' => "phloor/object/phloor_menuitem/menu/{$menuitem->menu_name}",
+    		'text' => elgg_echo('phloor_menuitem:view_menu'),
+    		'link_class' => 'elgg-button elgg-button-action',
+    	    'priority' => 100,
         ));
     }
 
@@ -207,11 +207,11 @@ function page_handler_view($hook, $type, $return, $params) {
     if ($menuitem->canEdit() && elgg_is_logged_in()) {
         $user = elgg_get_logged_in_user_entity();
         elgg_register_menu_item('title', array(
-    			'name' => "phloor-menuitem-{$menuitem->guid}-addchild",
-    			'href' => "phloor/object/phloor_menuitem/add/{$user->guid}?parent_guid={$menuitem->guid}",
-    			'text' => elgg_echo('phloor_menuitem:newchild'),
-    			'link_class' => 'elgg-button elgg-button-action',
-    		    'priority' => 200,
+			'name' => "phloor-menuitem-addchild",
+			'href' => "phloor/object/phloor_menuitem/add/{$user->guid}?parent_guid={$menuitem->guid}",
+			'text' => elgg_echo('phloor_menuitem:newchild'),
+			'link_class' => 'elgg-button elgg-button-action',
+		    'priority' => 200,
         ));
     }
 
@@ -302,10 +302,10 @@ function page_handler($params) {
 
 /*
  *
- *
- *
- *
- **/
+*
+*
+*
+**/
 
 function instance_of($menuitem) {
     return elgg_instanceof($menuitem, 'object', 'phloor_menuitem', 'PhloorMenuitem');
@@ -345,10 +345,10 @@ function get_page_content_list($container_guid = NULL, $params = array()) {
 
     $options = array(
 		'full_view'        => FALSE,
-		//'offset'           => (int) max(get_input('offset', 0), 0),
-		//'limit'            => (int) max(get_input('limit', 10), 0),
+    //'offset'           => (int) max(get_input('offset', 0), 0),
+    //'limit'            => (int) max(get_input('limit', 10), 0),
 		'list_type_toggle' => TRUE,
-		'pagination'       => TRUE,
+		'pagination'       => false,
 		'list_class'       => 'elgg-list-entity phloor-list-menuitem',
     );
 
@@ -399,13 +399,13 @@ function get_page_content_list($container_guid = NULL, $params = array()) {
 }
 
 /**
-* Get the root entities of a menu
-*
-* if no menu is given (array('menu_name')..)
-* then it defaults to the 'site' menu
-*
-* @param unknown_type $params
-*/
+ * Get the root entities of a menu
+ *
+ * if no menu is given (array('menu_name')..)
+ * then it defaults to the 'site' menu
+ *
+ * @param unknown_type $params
+ */
 function get_entities($params = array()) {
     $return = array();
 
@@ -429,7 +429,7 @@ function get_entities($params = array()) {
  *
  * @param unknown_type $params
  */
-function get_menuitems_top($params = array()) {    
+function get_menuitems_top($params = array()) {
     $menu_name = elgg_extract('menu_name', $params, 'all');
     unset($params['menu_name']);
 
@@ -439,9 +439,9 @@ function get_menuitems_top($params = array()) {
 		'metadata_name_value_pairs' => array(
 			'menu_name'   => $menu_name,
 			'parent_guid' => '0',
-		),
+    ),
     );
-    
+
     $options = $options + $params;
 
     return namespace\get_entities($options);
@@ -464,12 +464,12 @@ function get_children($menuitem) {
 }
 
 /**
-* Appends all menuitems in the given menu to
-* an array
-*
-* @param array  $menu
-* @param string $menu_name
-*/
+ * Appends all menuitems in the given menu to
+ * an array
+ *
+ * @param array  $menu
+ * @param string $menu_name
+ */
 function get_items_for_menu($menu_name) {
     // get root elements
     $menuitems_top = namespace\get_menuitems_top(array(
@@ -480,17 +480,17 @@ function get_items_for_menu($menu_name) {
 }
 
 /**
-* Appends all menuitems in the given menu to
-* an array
-*
-* @param array  $menu
-* @param string $menu_name
-*/
+ * Appends all menuitems in the given menu to
+ * an array
+ *
+ * @param array  $menu
+ * @param string $menu_name
+ */
 function prepare_items_for_menu($menuitems) {
     if (empty($menuitems)) {
         return array();
     }
-    
+
     $pl = new \ElggPriorityList();
     // insert unique priority -> menuitem array
     foreach ($menuitems as $menuitem) {
@@ -519,11 +519,11 @@ function prepare_items_for_menu($menuitems) {
 }
 
 /**
-*
-* Sorts menu items by priority
-*
-* @param $menuitems  array of PhloorMenuitems
-*/
+ *
+ * Sorts menu items by priority
+ *
+ * @param $menuitems  array of PhloorMenuitems
+ */
 function sort_by_priority($menuitems) {
     $pl = new \ElggPriorityList();
 

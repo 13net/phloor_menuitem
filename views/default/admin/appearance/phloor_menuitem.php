@@ -27,19 +27,35 @@ admin_gatekeeper();
 elgg_load_js('jquery-ui');
 elgg_load_js('phloor-menuitem-sortable-js'); // load sortable js!
 
-$count = \phloor_menuitem\get_entities(array('count' => true));
-$entity_count = elgg_echo('phloor_menuitem:admin:appearance:entity_count', array($count));
-
 // get page content list (just like in normal view)
 $menu_name = get_input('menu_name', 'site', true);
-$content_list = \phloor_menuitem\get_page_content_list(null, array(
-	'menu_name' => $menu_name,
+
+// register 'add' button
+\phloor\entity\object\page_handler\defaults\register_title_button('phloor_menuitem', "add");
+
+$count = \phloor_menuitem\get_entities(array(
+	'metadata_name_value_pairs' => array(
+		'menu_name'   => $menu_name,
+	),
+    'count' => true
 ));
-$menuitem_list = elgg_extract('content', $content_list, '');
+$entity_count = elgg_echo('phloor_menuitem:admin:appearance:entity_count', array($count));
+
 
 $filter = elgg_view('phloor_menuitem/menufilter', array(
-    'filter_context' => $menu_name,
+	'filter_context' => $menu_name,
 ));
+
+$menuitem_list = '';
+if ($count > 0) {    
+    $content_list = \phloor_menuitem\get_page_content_list(null, array(
+    	'menu_name' => $menu_name,
+    ));
+    $menuitem_list = elgg_extract('content', $content_list, '');    
+}
+
+
+$body .=  $filter . $menuitem_list . "<p>{$entity_count}</p>";
 
 $title       = elgg_view_title(elgg_echo('phloor_menuitem:admin:appearance:title'));
 $description = elgg_echo('phloor_menuitem:admin:appearance:description');
@@ -48,9 +64,7 @@ $content = <<<___HTML
     {$title}
 	<p>{$description}</p>
 	<div>
-        {$filter}
-        {$menuitem_list}
-		<p>{$entity_count}</p>
+		$body
 	</div>
 ___HTML;
 
