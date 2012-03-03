@@ -63,8 +63,8 @@ function phloor_menuitem_init() {
      * JS
      */
     // sortable js
-    elgg_register_simplecache_view('js/phloor_menuitem/sortable-js');
-    $url = elgg_get_simplecache_url('js', 'phloor_menuitem/sortable-js');
+    elgg_register_simplecache_view('js/phloor_menuitem/sortable');
+    $url = elgg_get_simplecache_url('js', 'phloor_menuitem/sortable');
     elgg_register_js('phloor-menuitem-sortable-js', $url, 'footer');
 
     /**
