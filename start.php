@@ -170,6 +170,8 @@ function phloor_menuitem_menu_setup() {
             }
         }
     }
+    
+    elgg_register_plugin_hook_handler  ('prepare', 'menu:site', 'phloor_menuitem_remove_more_menu', 1000);
 }
 
 
@@ -182,25 +184,46 @@ function phloor_menuitem_menu_setup() {
  * @return array
  */
 function phloor_menuitem_menu_setup_hook($hook, $type, $return, $params) {
-    if ($hook == 'prepare' && substr($type, 0, 5) == 'menu:') {
-        $menu_name = substr($type, 5, strlen($type));
+    if ($hook != 'prepare' || substr($type, 0, 5) != 'menu:') {
+        return $return;
+    }
+    
+    $menu_name = substr($type, 5, strlen($type));
 
-        // do not add page items when in admin mode
-        // this would screw up the admin menu section
-        if (elgg_in_context('admin') && strcmp('page', $menu_name) == 0) {
-            return $return;
-        }
+    // do not add page items when in admin mode
+    // this would screw up the admin menu section
+    if (elgg_in_context('admin') && strcmp('page', $menu_name) == 0) {
+        return $return;
+    }
 
-        // get MenuItems for the menu
-        $featured = \phloor_menuitem\get_items_for_menu($menu_name);
-        
-        if (count($featured) > 0) {
-            // shift the former menu on the 'more' section
-            $return['more'] = $return['default'];
-            $return['default'] = $featured;
+    // get MenuItems for the menu
+    $featured = \phloor_menuitem\get_items_for_menu($menu_name);
+    
+    if (is_array($featured) && !empty($featured)) {
+        // shift the former menu on the 'more' section
+        $return['more'] = $return['default'];
+        $return['default'] = $featured;
+    }
 
-            return $return;
-        }
+    return $return;
+}
+
+/**
+* Hide more section of 'site' menu
+*/
+
+function phloor_menuitem_remove_more_menu($hook, $type, $return, $params) {
+    if ($hook != 'prepare' || strcmp($type, 'menu:site') != 0) {
+        return $return;
+    }
+    
+    $hide_more_section = elgg_get_plugin_setting('hide_menu_site_more_public', 'phloor_menuitem');
+    if (elgg_is_logged_in()) {
+        $hide_more_section =  elgg_get_plugin_setting('hide_menu_site_more_loggedin', 'phloor_menuitem');
+    }
+    
+    if (phloor_str_is_true($hide_more_section)) {
+        unset($return['more']);
     }
 
     return $return;

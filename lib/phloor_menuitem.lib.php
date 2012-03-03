@@ -22,6 +22,10 @@
 
 namespace phloor_menuitem;
 
+function instance_of($menuitem) {
+    return elgg_instanceof($menuitem, 'object', 'phloor_menuitem', 'PhloorMenuitem');
+}
+
 /**
  * default attributes
  */
@@ -307,10 +311,6 @@ function page_handler($params) {
 *
 **/
 
-function instance_of($menuitem) {
-    return elgg_instanceof($menuitem, 'object', 'phloor_menuitem', 'PhloorMenuitem');
-}
-
 /**
  *
  * Enter description here ...
@@ -349,7 +349,7 @@ function get_page_content_list($container_guid = NULL, $params = array()) {
     //'limit'            => (int) max(get_input('limit', 10), 0),
 		'list_type_toggle' => TRUE,
 		'pagination'       => false,
-		'list_class'       => 'elgg-list-entity phloor-list-menuitem',
+		'list_class'       => 'elgg-list-entity phloor-list-phloor_menuitem',
     );
 
     if ($container_guid) {

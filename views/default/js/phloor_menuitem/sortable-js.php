@@ -6,7 +6,7 @@ elgg.provide('phloor_menuitem.sortable');
 phloor_menuitem.sortable.init = function() {
 
 	// make the phloor-list-menuitem list sortable
-	$(".phloor-list-menuitem").sortable({ 
+	$(".phloor-list-phloor_menuitem").sortable({ 
 		opacity: 0.7, 
 		cursor: 'move', 
 		update: function(event, ui) {
